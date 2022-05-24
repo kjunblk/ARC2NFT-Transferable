@@ -92,4 +92,4 @@ function new_arc2_nft(name, symbol, initial_supply, options, owner)
   return address
 end
 
-abi.register(new_token)
+abi.register(new_arc2_token)
