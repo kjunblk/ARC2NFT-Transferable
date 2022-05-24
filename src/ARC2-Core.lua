@@ -237,13 +237,13 @@ function nextToken(prev_index)
     return nil, nil
   end
 
+  while tokenId == nil and index < last_index
   do
     index = index + 1
     tokenId = _ids[tostring(index)]
-  while tokenId == nil and index < last_index
 
   if index == last_index and tokenId == nil then
-    index = nil
+     index = nil
   end
 
   return index, tokenId
@@ -258,6 +258,7 @@ end
 -- for the next calls, just inform the returned index from the last call
 -- return value: 2 variables: index and tokenId
 -- if no token is found with the given query, it returns (nil, nil)
+--
 function findToken(query, prev_index)
   _typecheck(query, 'table')
   _typecheck(prev_index, 'uint')
@@ -275,13 +276,14 @@ function findToken(query, prev_index)
     return nil, nil
   end
 
+  while tokenId == nil and index < last_index
   do
     index = index + 1
     tokenId = _ids[tostring(index)]
     if not token_matches(tokenId, query) then
       tokenId = nil
     end
-  while tokenId == nil and index < last_index
+  end
 
   if index == last_index and tokenId == nil then
     index = nil

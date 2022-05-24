@@ -85,7 +85,7 @@ end
 -- @event   mint(to, tokenId)
 
 function mint(to, tokenId, ...)
-  assert(isMinter(system.getSender(), "ARC2: only minter can mint")
+  assert(isMinter(system.getSender()), "ARC2: only minter can mint")
   assert(not _max_supply:get() or (totalSupply() + 1) <= _max_supply:get(), "ARC2: totalSupply is over MaxSupply")
 
   return _mint(to, tokenId, ...)

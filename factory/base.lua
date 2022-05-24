@@ -22,6 +22,10 @@ arc2_approval = [[
 %approval%
 ]]
 
+arc2_nontransferable = [[
+%nontransferable%
+]]
+
 arc2_constructor = [[
 state.var {
   _creator = state.value()
@@ -67,6 +71,9 @@ function new_arc2_nft(name, symbol, initial_supply, options, owner)
   end
   if options["approval"] then
     contract_code = contract_code .. arc2_approval
+  end
+  if options["nontransferable"] then
+    contract_code = contract_code .. arc2_nontransferable
   end
 
   local max_supply = options["max_supply"]

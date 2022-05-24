@@ -79,6 +79,10 @@ function nonTransferable() end
 ### Burnable extension
 
 ``` lua
+-- burn a token  
+-- @type    call
+-- @param   tokenId 
+-- @event   burn(account,tokenId)
 function burn(tokenId) end
 ```
 
@@ -226,14 +230,14 @@ function removeFromBlacklist(account_list)
 function isOnBlacklist(account)
 ```
 
-### nonTaransferable (sbt) extension
+### Non-Taransferable (sbt) extension
 
 ``` lua
 -- revoke a token  
 -- @type    call
 -- @param   token_id 
--- @event   burn(account,token_id)
-function revoke(token_id)
+-- @event   burn(account,tokenId)
+function revoke(tokenId) end
 ```
 
 
