@@ -1,4 +1,4 @@
 
 function constructor()
-  _init('test_nft', 'TNFT', true)
+  _init('test_nft', 'TNFT')
 end

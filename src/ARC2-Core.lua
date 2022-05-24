@@ -50,12 +50,12 @@ state.var {
   -- Blacklist
   _blacklist = state.map(),        -- address -> boolean
 
-  -- Transable
-  _transfersEnabled = state.value() -- boolean
+  -- NonTransable
+  _nonTransferable = state.value() -- boolean
 }
 
 -- call this at constructor
-local function _init(name, symbol, transferable)
+local function _init(name, symbol)
   _typecheck(name, 'string')
   _typecheck(symbol, 'string')
   
@@ -66,7 +66,10 @@ local function _init(name, symbol, transferable)
   _num_burned:set(0)
   _paused:set(false)
 
-  _transfersEnabled:set(transferable)
+  if extensions["nontransferable"] then
+    _nonTransferable:set(true)
+  end
+
 end
 
 local function _callOnARC2Received(from, to, tokenId, ...)
@@ -94,8 +97,8 @@ function symbol()
 end
 
 -- seo Transferable
-function transfersEnabled()
-  return _transfersEnabled:get()
+function nonTransferable()
+  return _nonTransferable:get()
 end
 
 -- Count of all NFTs
@@ -176,7 +179,7 @@ end
 
 local function _transfer(from, to, tokenId, ...)
 -- seo Transferable
-  assert(_transfersEnabled, "ARC2: non-transferable contract")
+  assert(not _nonTransferable:get(), "ARC2: non-transferable contract")
   assert(not _paused:get(), "ARC2: paused contract")
   assert(not _blacklist[from], "ARC2: sender is on blacklist")
   assert(not _blacklist[to], "ARC2: recipient is on blacklist")
@@ -329,5 +332,5 @@ end
 
 
 abi.register(transfer, arc2_extensions)
--- seo Transferable
-abi.register_view(name, symbol, transfersEnabled, balanceOf, ownerOf, totalSupply, nextToken, findToken)
+-- seo nonTransferable
+abi.register_view(name, symbol, nonTransferable, balanceOf, ownerOf, totalSupply, nextToken, findToken)

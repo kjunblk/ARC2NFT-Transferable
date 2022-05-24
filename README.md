@@ -69,6 +69,11 @@ function ownerOf(tokenId) end
 -- @param   ...     (Optional) addtional data, MUST be sent unaltered in call to 'onARC2Received' on 'to'
 -- @event   transfer(from, to, tokenId)
 function transfer(to, tokenId, ...) end
+
+-- Indicate if contract is nonTransferable 
+-- @type    query
+-- @return true/false 
+function nonTransferable() end
 ```
 
 ### Burnable extension
@@ -220,6 +225,26 @@ function removeFromBlacklist(account_list)
 -- @param   account   (address)
 function isOnBlacklist(account)
 ```
+
+### nonTaransferable (sbt) extension
+
+``` lua
+-- revoke a token  
+-- @type    call
+-- @param   token_id 
+-- @event   burn(account,token_id)
+function revoke(token_id)
+```
+
+
+### Hook
+
+Contracts that want to handle tokens must implement the following function to define how to handle the tokens they receive. If this function is not implemented, the token transfer will fail. Therefore, it is possible to prevent the token from being lost.
+
+``` lua
+-- The ARC2 smart contract calls this function on the recipient after a 'transfer'
+-- @param   operator    (address) a address which called token 'transfer' function
+-- @param   from        (address) a sender's address
 
 
 ### Hook
