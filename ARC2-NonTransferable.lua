@@ -2,7 +2,7 @@
 -- Aergo Standard NFT Interface (Proposal) - 20210425
 ------------------------------------------------------------------------------
 
-extensions["nontransferable"] = true
+extensions["non_transferable"] = true
 
 function revoke(tokenId)
   _typecheck(tokenId, 'str128')
@@ -15,3 +15,4 @@ function revoke(tokenId)
 end
 
 abi.register(revoke)
+

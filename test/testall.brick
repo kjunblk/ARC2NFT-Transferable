@@ -1,6 +1,0 @@
-# test all test brick files
-batch ./mint.brick
-batch ./burn.brick
-batch ./transfer.brick
-batch ./approve.brick
-batch ./receiver.brick
